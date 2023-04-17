@@ -15,9 +15,9 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 </head>
-<body>
+<body style="background-color:lightgrey">
      <div class="container" id="applicationPage">
-         <div class="jumbotron text-center mt-2">
+         <div class="jumbotron text-center mt-3">
              <h1 class="display-3 ">Interviewee App</h1>
              <hr />
              <h6 class="display-5">- APPLY FOR THE POSITION -</h6>
@@ -34,7 +34,7 @@
                             <li>Writing clean, functional code on the front- and back-end.</li>
                             <li>Testing and fixing bugs or other coding issues.</li>
                         </ul>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Apply</button>
+                        <button type="button" class="btn btn-primary" data-backdrop="static" data-toggle="modal" data-target="#myModal">Apply</button>
                     </div>
                 </div>
             </div>
@@ -75,7 +75,7 @@
     </div>
     <%-- Modal --%>
     <div class="modal fade" id="myModal">
-        <div class="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xl">
             <div class="modal-content">
 
                 <%-- Modal Header --%>
@@ -297,7 +297,18 @@
             //$('#age').html(age + ' years old');
         }
         function logOut() {
-            window.location.href = "login.aspx";
+            Swal.fire({
+                title: 'Are you sure you want to log out?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, log out!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "login.aspx";
+                }
+            })
         }
 
         $("#submit").on('click', function () {
@@ -431,6 +442,7 @@
 
         $("#reset").click(function () {
             clear();
+            return false;
         });
 
         function addDataToLocal() {

@@ -243,7 +243,18 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
         function logOut() {
-            window.location.href = "login.aspx";
+            Swal.fire({
+                title: 'Are you sure you want to log out?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, log out!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "login.aspx";
+                }
+            })
         }
 
         var locations = {
@@ -473,7 +484,9 @@
             const nameArr = name.split(" ");
             const myArr = course.split(",");
             const myArray = prof.split(",");
-            const addArr = address.split(",")
+            const addArr = address.split(", ")
+            var state = addArr[1];
+            var city = addArr[0];
 
             $("#editfname").val(nameArr[0]);
             $("#editlname").val(nameArr[1]);
@@ -481,8 +494,8 @@
             $("#editdate").val(date);
             $("#editdegree").val(degree);
             $("#editproject").val(project);
-            $("#editstate").val(addArr[1]);
-            $("#editcity").val(addArr[0]);
+            $("#editstate").val(state);
+            $("#editcity").val(city);
             $("#editpincode").val(addArr[2]);
             $("input[type='radio'][value='" + exp + "']").prop('checked', true);
 
